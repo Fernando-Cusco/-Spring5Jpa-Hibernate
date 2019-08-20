@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sistemas.springboot.app.models.entity.Cliente;
 
 
-@Repository															//Manejo de exepciones
+@Repository
 public class ClienteDaoImp implements IClienteDao {
 
 	@PersistenceContext
