@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity																			//persistencia
 @Table(name="clientes") 														//permite colocar un nombre sobre la base de datos
 public class Cliente implements Serializable{
@@ -28,13 +30,15 @@ public class Cliente implements Serializable{
 	
 	@Column(name = "create_at")													//Indica el nombre del campo sobre la DB.
 	@Temporal(TemporalType.DATE)												//Indica el formato de la fecha
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	private Date createAt;														
 	
 	
+	/*
 	@PrePersist																	//se llama este metodo justo antes de que se inserte en la base de datos
 	public void prePersist() {
 		createAt = new Date();
-	}
+	}*/
 	
 	//es recomendable serializar la clase
 	private static final long serialVersionUID = 8014868644097168934L;
