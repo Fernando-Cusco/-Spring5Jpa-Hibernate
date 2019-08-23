@@ -8,9 +8,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity																			//persistencia
 @Table(name="clientes") 														//permite colocar un nombre sobre la base de datos
@@ -20,14 +27,27 @@ public class Cliente implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY )						//Indica que el id sera autoincrementable
 	private Long id;
 
-	
+	@NotEmpty
+	//@Size(min = 4, max = 100)													//Especifica un rango de campo
 	private String nombre;
+	@NotEmpty
 	private String apellido;
+	@NotEmpty
+	@Email
 	private String email;
 	
+	@NotNull
 	@Column(name = "create_at")													//Indica el nombre del campo sobre la DB.
 	@Temporal(TemporalType.DATE)												//Indica el formato de la fecha
+	@DateTimeFormat(pattern = "yyyy/mm/dd")
 	private Date createAt;														
+	
+	
+	/*
+	@PrePersist																	//se llama este metodo justo antes de que se inserte en la base de datos
+	public void prePersist() {
+		createAt = new Date();
+	}*/
 	
 	//es recomendable serializar la clase
 	private static final long serialVersionUID = 8014868644097168934L;
