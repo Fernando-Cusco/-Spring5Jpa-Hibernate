@@ -28,7 +28,7 @@ public class Cliente implements Serializable{
 	private Long id;
 
 	@NotEmpty
-	@Size(min = 4, max = 100)													//Especifica un rango de campo
+	//@Size(min = 4, max = 100)													//Especifica un rango de campo
 	private String nombre;
 	@NotEmpty
 	private String apellido;
