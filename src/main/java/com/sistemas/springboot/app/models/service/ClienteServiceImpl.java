@@ -18,7 +18,7 @@ public class ClienteServiceImpl implements IClienteService{
 	@Transactional(readOnly = true)									//Modo solo lectura, toma el metodo y lo envuelve dentro de la transaccion
 	@Override
 	public List<Cliente> findAll() {
-		return clienteDao.findAll();
+		return (List<Cliente>) clienteDao.findAll();
 	}
 
 	@Override
@@ -30,13 +30,13 @@ public class ClienteServiceImpl implements IClienteService{
 	@Override
 	@Transactional(readOnly = true)
 	public Cliente findOne(Long id) {
-		return clienteDao.findOne(id);
+		return clienteDao.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional()
 	public void delete(Long id) {
-		clienteDao.delete(id);
+		clienteDao.deleteById(id);
 	}
 
 }
