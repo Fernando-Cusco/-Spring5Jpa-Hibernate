@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.sistemas.springboot.app.models.entity.Cliente;
 
@@ -18,7 +17,7 @@ public class ClienteDaoImp implements IClienteDao {
 	private EntityManager em;
 	
 	@SuppressWarnings("unchecked")
-	@Transactional(readOnly = true)									//Modo solo lectura, toma el metodo y lo envuelve dentro de la transaccion
+	//@Transactional(readOnly = true)									//Modo solo lectura, toma el metodo y lo envuelve dentro de la transaccion
 	@Override
 	public List<Cliente> findAll() {
 		// TODO Auto-generated method stub
@@ -26,7 +25,7 @@ public class ClienteDaoImp implements IClienteDao {
 	}
 
 	@Override
-	@Transactional
+	//@Transactional
 	public void save(Cliente cliente) {
 		if(cliente.getId() != null && cliente.getId() > 0) {
 			em.merge(cliente);															//actualiza el cliente
@@ -36,13 +35,13 @@ public class ClienteDaoImp implements IClienteDao {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	//@Transactional(readOnly = true)
 	public Cliente findOne(Long id) {
 		return em.find(Cliente.class, id);
 	}
 
 	@Override
-	@Transactional()
+	//@Transactional()
 	public void delete(Long id) {
 		em.remove(findOne(id));
 	}
