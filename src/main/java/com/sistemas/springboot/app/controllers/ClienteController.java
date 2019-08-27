@@ -11,12 +11,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.sistemas.springboot.app.models.dao.ClienteDaoImp;
 import com.sistemas.springboot.app.models.dao.IClienteDao;
 import com.sistemas.springboot.app.models.entity.Cliente;
 
 @Controller														//Marcamos la clase propia de un controlador
+@SessionAttributes("cliente")
 public class ClienteController {
 	
 	@Autowired													//Busca un componente en el contenedor que implemente ICliente
@@ -38,12 +41,13 @@ public class ClienteController {
 	}
 	
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
-	public String guardar(@Valid Cliente cliente, BindingResult result, Model model) {
+	public String guardar(@Valid Cliente cliente, BindingResult result, Model model, SessionStatus state) {
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario Cliente");
 			return "form";
 		}
 		clienteDao.save(cliente);
+		state.setComplete();
 		return "redirect:listar";
 	}
 	
