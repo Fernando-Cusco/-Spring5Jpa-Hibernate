@@ -63,7 +63,7 @@ public class PageRender <T> {
 		return paginas;
 	}
 	
-	public boolean isFirts() {
+	public boolean isFirst() {
 		return page.isFirst();
 	}
 	
